@@ -2698,8 +2698,8 @@ milestone = "M4"
 status = "shipped"
 commands = ["page.extract"]
 tools = ["page_extract"]
-evidence = ["crates/ui-egui/tests/editing.rs::extract_button_copies_selected_pages_to_a_new_tab", "crates/automation/tests/automation.rs::combine_extract_and_split"]
-notes = ""
+evidence = ["crates/ui-egui/tests/editing.rs::extract_button_copies_selected_pages_to_a_new_tab", "crates/automation/tests/automation.rs::combine_extract_and_split", "crates/organize/src/tests.rs::extract_and_split_keep_the_pdfx_output_intent_and_identification"]
+notes = "Carries the PDF/X output intent and identification (#263) in a new XMP packet; the source XMP (dates, other schemas) is not copied."
 
 [[feature]]
 id = "organize.extract-separate-files"
@@ -2818,8 +2818,8 @@ milestone = "M4"
 status = "shipped"
 commands = ["page.split"]
 tools = ["doc_split"]
-evidence = ["crates/ui-egui/tests/editing.rs::split_dialog_writes_one_file_per_part", "crates/organize/src/tests.rs::split_ranges_cover_every_page_once", "crates/organize/src/tests.rs::split_produces_standalone_documents_with_metadata"]
-notes = ""
+evidence = ["crates/ui-egui/tests/editing.rs::split_dialog_writes_one_file_per_part", "crates/organize/src/tests.rs::split_ranges_cover_every_page_once", "crates/organize/src/tests.rs::split_produces_standalone_documents_with_metadata", "crates/organize/src/tests.rs::extract_and_split_keep_the_pdfx_output_intent_and_identification"]
+notes = "Each part carries the PDF/X output intent and identification (#263), as Extract does."
 
 [[feature]]
 id = "organize.split-before-pages"
@@ -2890,8 +2890,8 @@ milestone = "M4"
 status = "shipped"
 commands = ["page.combine"]
 tools = ["doc_combine"]
-evidence = ["crates/organize/src/tests.rs::combine_concatenates_with_a_bookmark_per_file", "crates/ui-egui/tests/editing.rs::combining_files_opens_a_new_unsaved_tab", "crates/automation/tests/automation.rs::combine_extract_and_split"]
-notes = ""
+evidence = ["crates/organize/src/tests.rs::combine_concatenates_with_a_bookmark_per_file", "crates/ui-egui/tests/editing.rs::combining_files_opens_a_new_unsaved_tab", "crates/automation/tests/automation.rs::combine_extract_and_split", "crates/organize/src/tests.rs::combine_keeps_pdfx_when_every_source_agrees", "crates/organize/src/tests.rs::combine_claims_no_pdfx_when_the_sources_disagree"]
+notes = "A PDF/X result (output intent, GTS_PDFXVersion, Trapped, XMP pdfxid) only when every source declares the same version and output intent (#263). When they differ the result claims none, and nothing reports that yet; Acrobat behaviour not observed."
 
 [[feature]]
 id = "organize.combine-bookmarks"
